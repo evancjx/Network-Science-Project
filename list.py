@@ -106,5 +106,3 @@ empty_tuple = ()
 empty_tuple = tuple()
 empty_set = {} #this isn't right. its a dict
 empty_set = set()
-
-#Change
