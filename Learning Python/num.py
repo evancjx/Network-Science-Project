@@ -2,6 +2,7 @@ num = 3
 print(type(num))
 
 print(3 + 2)
+print(3 - 2)
 print(3//2) #Floor divison
 print(3**2) #Exponent
 print(3 % 2)
