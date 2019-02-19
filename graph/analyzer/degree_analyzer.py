@@ -1,4 +1,5 @@
 from itertools import groupby
+import math
 import time
 
 
@@ -38,14 +39,14 @@ def count_degree(network):
     node_degree = {}
     for key, value in network.items():
         node_degree[key] = len(value)
-        # if key == 10:
-        #     break
     end_time = int(round(time.time() * 1000))
     compute_time = int(end_time) - int(start_time)
-    print('({}ms) Count degree'.format(compute_time))
+    print('({}ms) Count the number of degree for each node'.format(compute_time))
     return node_degree
 
 
+# Count how many nodes with degree x,
+# Where x can be 1 to 100
 def count_node_with_degree_x(node_degree):
     degree_frequency = {}
     for key, value in node_degree.items():
@@ -69,4 +70,9 @@ def degree_distribution(network):
     node_degree = count_degree(network)
     degree_frequency = count_node_with_degree_x(node_degree)
     return calculate_degree_distribution(len(network), degree_frequency)
+
+
+def calculate_degree_n_moment(degree_count, n):
+    return sum([math.pow(x, n) for x in degree_count.values()]) / len(degree_count.values())
+
 
