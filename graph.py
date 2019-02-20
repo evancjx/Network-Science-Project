@@ -1,10 +1,10 @@
 import os
 import time
-import collections
 
 import config as CONFIG
 import graphCreators.graphCreator as GRAPH_CREATOR
 import graph.analyzer.degree_analyzer as degree_analyzer
+import graph.analyzer.clustering as clustering_analyzer
 
 
 # Where node_id not in txt means not connected at all, standalone node
@@ -161,5 +161,19 @@ def load_graph_v4(name):
 
 network = load_graph_v4('com-amazon.ungraph')
 print('size of the network: ' + str(len(network)))
-degree_distribution = degree_analyzer.degree_distribution(network)
-print('Degree Distribution <degree>:<probability> = ' + str(degree_distribution))
+node_degree = degree_analyzer.count_degree(network)
+# degree_frequency = degree_analyzer.count_node_with_degree_x(node_degree)
+# print('Each degree frequency = ' + str(degree_frequency))
+# degree_distribution = degree_analyzer.calculate_degree_distribution(len(network), degree_frequency)
+# print('Degree Distribution <degree>:<probability> = ' + str(degree_distribution))
+# first_moment = degree_analyzer.calculate_degree_n_moment(node_degree, n=1)
+# print('1st Moment (Average degree): ' + str(first_moment))
+# second_moment = degree_analyzer.calculate_degree_n_moment(node_degree, n=2)
+# print('2nd Moment (Variance): ' + str(second_moment))
+# k_max = degree_analyzer.find_k_max(degree_frequency)
+# print('Maximum k: ' + str(k_max))
+# k_min = degree_analyzer.find_k_min(degree_frequency)
+# print('Minimum k: ' + str(k_min))
+node_cc_links = clustering_analyzer.connected_neighbours_links(network)
+clustering_analyzer.clustering_coefficient(node_degree, node_cc_links)
+
