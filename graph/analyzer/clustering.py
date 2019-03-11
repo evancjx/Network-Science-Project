@@ -40,11 +40,12 @@ def connected_neighbours_links(network):
 
 def clustering_coefficient(node_degree, node_cc_links):
     clustering_coeff = dict()
+    print('length: ' + str(len(node_degree)))
     for key, node_degree in node_degree.items():
         if int(node_degree) > 1:
             cc = float((2 * int(node_cc_links[key]))/(int(node_degree) * (int(node_degree) - 1)))
             # print(cc)
-            clustering_coeff[int(key)] = cc
+            clustering_coeff[int(key)] = round(cc, 2)
         else:
             clustering_coeff[int(key)] = 0
         # break
