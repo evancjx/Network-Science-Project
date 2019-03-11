@@ -1,4 +1,9 @@
+import matplotlib.pyplot as plt
+import os
 import time
+import numpy as np
+
+import config
 
 
 def connected_neighbours_links(network):
@@ -12,7 +17,7 @@ def connected_neighbours_links(network):
         for node in nodes:
             nodes_list = list(nodes)
             # print('node: ' + node)
-            nodes_list.remove(str(node))
+            nodes_list.remove(node)
             # print('after removed nodes list: ' + str(nodes_list))
 
             for n in nodes_list:
@@ -46,8 +51,47 @@ def clustering_coefficient(node_degree, node_cc_links):
             cc = float((2 * int(node_cc_links[key]))/(int(node_degree) * (int(node_degree) - 1)))
             # print(cc)
             clustering_coeff[int(key)] = round(cc, 2)
-        else:
-            clustering_coeff[int(key)] = 0
+        # else:
+        #     clustering_coeff[int(key)] = 0
         # break
     # print(clustering_coeff)
     return clustering_coeff
+
+
+def plot_store_clustering_coefficient(network_name, dict_values, node_degree, plot_name):
+    file_name = network_name + '_' + plot_name + '.png'
+    file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
+
+    y = []
+    x = []
+    for key, value in dict_values.items():
+        if key > 0 and value > 0.0:
+            # print(node_degree[key])
+            x.append(node_degree[key])
+            y.append(value)
+
+    plt.scatter(x, y, s=20*0.1, c='r')
+    plt.title(plot_name)
+    plt.xlabel('k')
+    plt.ylabel('C(k)')
+    plt.savefig(file_path)
+    plt.close()
+
+def plot_store_clustering_coefficient_log_log(network_name, dict_values, node_degree, plot_name):
+    file_name = network_name + '_' + plot_name + '.png'
+    file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
+
+    y = []
+    x = []
+    for key, value in dict_values.items():
+        if key > 0 and value > 0.0:
+            # print(node_degree[key])
+            x.append(np.log10(node_degree[key]))
+            y.append(np.log10(value))
+
+    plt.scatter(x, y, s=20 * 0.1, c='r')
+    plt.title(plot_name)
+    plt.xlabel('k')
+    plt.ylabel('C(k)')
+    plt.savefig(file_path)
+    plt.close()

@@ -1,6 +1,12 @@
 from itertools import groupby
+import os
 import math
+import numpy as np
 import time
+import matplotlib.pyplot as plt
+
+import config
+import graph.analyzer.plotutil as plot_util
 
 
 def count_degree_old(vertex):
@@ -83,3 +89,45 @@ def find_k_max(degree_distribution):
 
 def find_k_min(degree_distribution):
     return min(degree_distribution.keys())
+
+
+def plot_store_degree_distribution_log_log(network_name, dict_values, plot_name):
+    file_name = network_name + '_' + plot_name + '.png'
+    file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
+
+    degree_list = []
+    probability_list = []
+    for key, value in dict_values.items():
+        if key > 0 and value > 0.0:
+            # print(type(key))
+            # print(np.log10(key))
+            degree_list.append(np.log10(key))
+            probability_list.append(np.log10(value))
+
+    plt.scatter(degree_list, probability_list, s=20*0.1, c='r')
+    plt.title(plot_name)
+    plt.xlabel('k')
+    plt.ylabel('P(k)')
+    plt.savefig(file_path)
+    plt.close()
+
+
+def plot_store_degree_distribution(network_name, dict_values, plot_name):
+    file_name = network_name + '_' + plot_name + '.png'
+    file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
+
+    degree_list = []
+    probability_list = []
+    for key, value in dict_values.items():
+        if key > 0 and value > 0.0:
+            # print(type(key))
+            # print(np.log10(key))
+            degree_list.append(key)
+            probability_list.append(value)
+
+    plt.scatter(degree_list, probability_list, s=20*0.1, c='r')
+    plt.title(plot_name)
+    plt.xlabel('k')
+    plt.ylabel('P(k)')
+    plt.savefig(file_path)
+    plt.close()

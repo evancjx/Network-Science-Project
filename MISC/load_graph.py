@@ -4,9 +4,6 @@ import time
 import networkx as nx
 
 import config as CONFIG
-import graphCreators.graphCreator as GRAPH_CREATOR
-import graph.analyzer.degree_analyzer as degree_analyzer
-import graph.analyzer.clustering as clustering_analyzer
 
 
 # Where node_id not in txt means not connected at all, standalone node
