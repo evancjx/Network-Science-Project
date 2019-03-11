@@ -6,7 +6,6 @@ import time
 import matplotlib.pyplot as plt
 
 import config
-import graph.analyzer.plotutil as plot_util
 
 
 def count_degree_old(vertex):
@@ -91,7 +90,8 @@ def find_k_min(degree_distribution):
     return min(degree_distribution.keys())
 
 
-def plot_store_degree_distribution_log_log(network_name, dict_values, plot_name):
+def plot_store_degree_distribution_log_log(network_name, dict_values):
+    plot_name = 'Degree Distribution Log Log'
     file_name = network_name + '_' + plot_name + '.png'
     file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
 
@@ -112,7 +112,8 @@ def plot_store_degree_distribution_log_log(network_name, dict_values, plot_name)
     plt.close()
 
 
-def plot_store_degree_distribution(network_name, dict_values, plot_name):
+def plot_store_degree_distribution(network_name, dict_values):
+    plot_name = 'Degree Distribution'
     file_name = network_name + '_' + plot_name + '.png'
     file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
 

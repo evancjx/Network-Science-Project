@@ -3,6 +3,7 @@ import os
 import config
 import graph.analyzer.degree_analyzer as da
 import graph.analyzer.clustering as ca
+import graph.analyzer.degree_correlation as dc
 
 
 class Graph:
@@ -61,6 +62,9 @@ class Graph:
             node_list.append(key)
         return node_list
 
+    def get_degree_of_node(self, node):
+        return len(self.network[node])
+
     def get_edge_count(self):
         count = 0
         for node, edge_list in self.network.items():
@@ -87,3 +91,12 @@ class Graph:
 
     def get_clustering_coefficient(self):
         return ca.clustering_coefficient(self.get_each_node_degree(), ca.connected_neighbours_links(self.network))
+
+    def get_degree_correlation(self):
+        return dc.compute_degree_correlation(self)
+
+    def plot_store_degree_correlation_log_log(self):
+        dc.plot_store_degree_correlation_log_log(self.graph_name, self.get_degree_correlation())
+
+    def plot_store_degree_correlation(self):
+        dc.plot_store_degree_correlation(self.graph_name, self.get_degree_correlation())

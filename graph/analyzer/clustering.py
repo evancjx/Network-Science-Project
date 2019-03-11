@@ -45,7 +45,6 @@ def connected_neighbours_links(network):
 
 def clustering_coefficient(node_degree, node_cc_links):
     clustering_coeff = dict()
-    print('length: ' + str(len(node_degree)))
     for key, node_degree in node_degree.items():
         if int(node_degree) > 1:
             cc = float((2 * int(node_cc_links[key]))/(int(node_degree) * (int(node_degree) - 1)))
@@ -58,7 +57,8 @@ def clustering_coefficient(node_degree, node_cc_links):
     return clustering_coeff
 
 
-def plot_store_clustering_coefficient(network_name, dict_values, node_degree, plot_name):
+def plot_store_clustering_coefficient(network_name, dict_values, node_degree):
+    plot_name = 'Clustering Coefficient'
     file_name = network_name + '_' + plot_name + '.png'
     file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
 
@@ -77,7 +77,9 @@ def plot_store_clustering_coefficient(network_name, dict_values, node_degree, pl
     plt.savefig(file_path)
     plt.close()
 
-def plot_store_clustering_coefficient_log_log(network_name, dict_values, node_degree, plot_name):
+
+def plot_store_clustering_coefficient_log_log(network_name, dict_values, node_degree):
+    plot_name = 'Clustering Coefficient Log Log'
     file_name = network_name + '_' + plot_name + '.png'
     file_path = os.path.join(config.DB_PLOT_DIR_PATH, file_name)
 
