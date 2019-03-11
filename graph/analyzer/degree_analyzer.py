@@ -48,7 +48,7 @@ def count_degree(network):
     end_time = int(round(time.time() * 1000))
     compute_time = int(end_time) - int(start_time)
     print('({}ms) Count the number of degree for each node'.format(compute_time))
-    print(node_degree)
+    # print(node_degree)
     return node_degree
 
 
